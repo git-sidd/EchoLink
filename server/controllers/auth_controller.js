@@ -135,3 +135,55 @@ export const logout=async(req,res)=>{
         message:"User Logged Out Successfully!"
     })
 }
+
+export const onboard=async(req,res)=>{
+    try {
+        const userId=req.user._id;
+        const {fullname,bio,nativelanguage,learninglanguage,location}=req.body;
+
+        if(!fullname||!bio||!nativelanguage||!learninglanguage||!location){
+            return res.status(401).json({
+                success:false,
+                message:"All fields are mandatory!",
+                mising_field:[
+                    !fullname && "fullname",
+                    !bio && "bio",
+                    !nativelanguage && "nativelanguage",
+                    !learninglanguage && "learninglanguage",
+                    !location && "location"
+                ]
+            })
+        }
+        const updatedUser=await User.findByIdAndUpdate(userId,{
+            ...req.body,
+            isOnboarded:true,
+        },{new:true})
+        if(!updatedUser){
+            return res.status(401).json({
+                success:false,
+                message:"User not found!"
+            })
+        } 
+        //TODO:Update User in Stream!
+        try {
+            await upsertStreamUser({
+                id:updatedUser._id,
+                name:updatedUser.fullname,
+                image:updatedUser.profilepic||" "
+            })
+            console.log(`Stream User Created name-${fullname}`)
+        } catch (StreamError) {
+            console.error("Error in creating Stream User:",StreamError)
+        }
+        return res.status(201).json({
+            success:true,
+            message:"User Onboarded Successfully!!"
+        })
+    } catch (error) {
+        console.error("Onboarding Error")
+        return res.status(501).json({
+            success:false,
+            message:"Internal Server Error!!"
+        })
+    }
+}
