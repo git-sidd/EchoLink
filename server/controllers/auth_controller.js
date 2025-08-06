@@ -29,6 +29,12 @@ export const signup=async(req,res)=>{
                 message:"User Already Existed!!"
             })
         }
+        if(password.length<6){
+            return res.status(402).json({
+                success:false,
+                message:"Length of password should be greater than 6 letters"
+            })
+        }
         let hashPassword;
         try {
             hashPassword=await bcrypt.hash(password,10);
@@ -50,7 +56,7 @@ export const signup=async(req,res)=>{
                 name:user.fullname,
                 image:user.profilepic||" "
             })
-            console.log("Stream User Created!")
+           
         } catch (error) {
             console.error("Error in creating Stream User")
         }
@@ -171,7 +177,7 @@ export const onboard=async(req,res)=>{
                 name:updatedUser.fullname,
                 image:updatedUser.profilepic||" "
             })
-            console.log(`Stream User Created name-${fullname}`)
+           
         } catch (StreamError) {
             console.error("Error in creating Stream User:",StreamError)
         }
