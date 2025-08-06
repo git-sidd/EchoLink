@@ -12,7 +12,7 @@ router.post("/logout",logout)
 
 
 router.post("/onboard",protectedRoute,onboard)
-router.post("/me",protectedRoute,(req,res)=>{
+router.get("/me",protectedRoute,(req,res)=>{
     res.status(201).json({
         success:true,
         message:"You are LoggedIn",

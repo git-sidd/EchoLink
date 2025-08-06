@@ -13,19 +13,17 @@ const Signup = () => {
     email: "",
     password: "",
   });
-  let res;
+ 
   const queryClient = useQueryClient();
   const { mutate, isPending, error, isSuccess } = useMutation({
     mutationFn: async () => {
       const response = await axiosInstance.post("/auth/signup", signupData);
-
-
       return response.data;
     },
     onSuccess: (data) => {
       toast.success(data.message);
       queryClient.invalidateQueries({ queryKey: ["authUser"] });
-      navigate("/");
+      navigate("/onboarding");
     }
   });
   const handleSubmit = (e) => {

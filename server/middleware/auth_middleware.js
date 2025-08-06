@@ -27,7 +27,7 @@ export const protectedRoute=async(req,res,next)=>{
     req.user=user;
     next();
     } catch (error) {
-        res.status(501).json({
+        res.status(500).json({
             success:false,
             message:`Unable to verify Identity!-${error}`
         })
