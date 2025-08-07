@@ -29,7 +29,7 @@ const Login = () => {
 
   return (
     <div>
-      <div className="h-screen flex flex-col md:flex-row items-center md:justify-center justify-center-safe md:p-12 overflow-hidden ">
+      <div className="h-screen flex flex-col md:flex-row items-center md:justify-center justify-center-safe md:p-12 overflow-hidden " data-theme="forest">
         {/* Left Part */}
         <div className="w-full md:w-1/2 space-y-6 md:px-10 p-4 ">
           <div className="text-center md:text-left">

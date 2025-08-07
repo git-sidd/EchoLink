@@ -48,7 +48,7 @@ const Onboarding = () => {
  <div className="flex flex-col items-center justify-center min-h-screen  p-4" data-theme="forest" >
   <div className=" rounded-3xl shadow-xl p-8 w-full max-w-lg " data-theme="cupcake">
     {/* Top Section */}
-    <h1 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 mb-4 text-center drop-shadow-lg">
+    <h1 className="text-2xl font-bold text-transparent bg-clip-text bg-black mb-4 text-center drop-shadow-lg">
       Complete Your Profile
     </h1>
     <div className="flex flex-col items-center mb-6">

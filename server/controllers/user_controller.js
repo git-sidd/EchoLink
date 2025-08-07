@@ -8,16 +8,13 @@ export const getRecommendedUser=async(req,res)=>{
         const currentuser=req.user;
         const recommendedUser=await User.find({
             $and:[
-                {isOnboarded:true},
                 {_id:{$ne:currentuserid}},//except current user
-                {$id:{$nin:currentuser.friends}}//except current user friend
+                {_id:{$nin:currentuser.friends}},//except current user friend
+                {isOnboarded:true},
             ]
         })
         res.status(201).json({
-            success:true,
-            message:"Recommended User",
-            RecommendedUser:recommendedUser
-
+            recommendedUser
         })
 
     } catch (error) {
@@ -100,7 +97,7 @@ export const sendFriendRequest=async(req,res)=>{
 
     } catch (error) {
         console.error("Error in Sending Request",error)
-        return res.status(501).json({
+        return res.status(502).json({
             success:false,
             message:"Internal Server Error"
         })
@@ -173,7 +170,7 @@ export const getOutgoingFriendRequest=async(req,res)=>{
         const outgoingReqs=await FriendRequest.find({
             status:"pending",
             sender:req.user.id
-        }).populate("reciever","fullname nativelanguage profilepic learninglanguage")
+        }).populate("receiver","fullname nativelanguage profilepic learninglanguage")
         res.status(201).json({
             outgoingReqs
         })
