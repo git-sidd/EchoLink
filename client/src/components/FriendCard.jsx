@@ -2,31 +2,38 @@ import React from 'react';
 
 const FriendCard = ({ friend }) => {
   return (
-    <div className="bg-white text-black rounded-2xl shadow-md p-4 flex flex-col items-center space-y-4 hover:shadow-lg transition-shadow duration-300">
-      {/* Profile Pic + Full Name */}
-      <div className="flex flex-col items-center">
-        <img
-          src={friend.profilepic}
-          alt={friend.fullname}
-          className="w-20 h-20 rounded-full object-cover border-2 border-purple-500"
-        />
-        <h3 className="mt-2 text-lg font-semibold">{friend.fullname}</h3>
-      </div>
+    <div className="bg-base-200 rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
+      <div className="p-5 space-y-4">
 
-      {/* Languages */}
-      <div className="flex justify-between w-full px-4 text-sm text-gray-700">
-        <div>
-          <span className="font-medium">Native:</span> {friend.nativelanguage}
+        {/* Profile Section */}
+        <div className="flex flex-col items-center gap-3">
+          <img
+            src={friend.profilepic}
+            alt={friend.fullname}
+            className="w-20 h-20 rounded-full object-cover border border-gray-400"
+          />
+          <h3 className="font-semibold text-lg text-white">{friend.fullname}</h3>
         </div>
-        <div>
-          <span className="font-medium">Learning:</span> {friend.learninglanguage}
-        </div>
-      </div>
 
-      {/* Message Button */}
-      <button className="mt-2 bg-purple-600 text-white px-4 py-2 rounded-full hover:bg-purple-700 transition-colors duration-200">
-        Message
-      </button>
+        {/* Languages */}
+        <div className="flex justify-between text-sm text-gray-300">
+          <span><strong>Native:</strong> {friend.nativelanguage}</span>
+          <span><strong>Learning:</strong> {friend.learninglanguage}</span>
+        </div>
+
+        {/* Bio (Optional) */}
+        {friend.bio && (
+          <p className="text-sm text-gray-400">{friend.bio}</p>
+        )}
+
+        {/* Message Button */}
+        <div className="mt-4">
+          <button className="btn btn-primary w-full">
+            Message
+          </button>
+        </div>
+        
+      </div>
     </div>
   );
 };

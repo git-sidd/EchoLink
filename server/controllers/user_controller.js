@@ -147,7 +147,7 @@ export const getFriendRequests=async(req,res)=>{
         const incomingReqs=await FriendRequest.find({
             status:"pending",
             receiver:req.user.id
-        }).populate("sender","fullname,nativelanguage,learninglanguage profilepic")
+        }).populate("sender","fullname nativelanguage learninglanguage profilepic")
 
         const acceptedReqs=await FriendRequest.find({
             status:"accepted",
